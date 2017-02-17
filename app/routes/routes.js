@@ -7,10 +7,14 @@ var jwt = require("jsonwebtoken");
 
 
 
-router.post('/register', registerCtrl);
-router.post('/login', authCtrl);
-router.get('/dashboard', passport.authenticate('jwt', {session:false}), function(req, res){
-  res.send('It worked! User id is: ' + req.user._id + '.' );
+router.post('/register', registerCtrl.CreateUser);
+router.post('/guest', registerCtrl.CreateGuest);
+router.post('/login', authCtrl.findUser);
+router.get('/dashboard', function(req, res){
+  res.send('It worked! User id is: ' + req.user.id + '.' );
+});
+router.get('/list', function(req, res){
+  res.send('List and User is: ' + req.user.email + '.' );
 });
 
 

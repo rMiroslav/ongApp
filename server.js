@@ -5,8 +5,7 @@ var morgan = require("morgan");
 var passport = require("passport");
 var jwt = require("jsonwebtoken");
 var config = require("./config/main");
-// var User = require('./app/models/user');
-// var promise = require('mpromise');
+var expressJwt = require("express-jwt");
 var app = express();
 
 
@@ -21,16 +20,22 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 
 //connect to db
-
+mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 
-//add pasport Strategy
+// unprotected routes
+app.use(expressJwt({ secret: config.secret}).unless({path: ['/api/login', '/api/register', '/api/guest']}));
 
-// require('./config/passport')(passport);
+//handle error if not token
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('invalid token...');
+  }
+});
 
 app.use('/api', require('./app/routes/routes'));
 
-
+//listen
 app.listen(config.port, function(){
   console.log("Running on port @=> " + config.port);
 });

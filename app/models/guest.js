@@ -2,11 +2,10 @@ var mongoose = require("mongoose");
 var bcrypt = require("bcryptjs");
 
 
-//User schema
-var UserSchema = new mongoose.Schema({
+//Guest schema
+var GuestSchema = new mongoose.Schema({
   email:{
     type:String,
-    lowercase:true,
     unique:true,
     required: true
   },
@@ -14,31 +13,31 @@ var UserSchema = new mongoose.Schema({
     type:String,
     required:true
   },
-  role:{
-    type:String,
-    enum:['Volunteer'],
-    default:'Volunteer'
-  },
   createdAt: {
     type: Date,
+     expires: '24h',
      default: Date.now
-    }
+    },
+  role:{
+    type:String,
+    enum:['Guest'],
+    default:'Guest'
+  }
 });
 
-
-// //Save user hash password
-UserSchema.pre('save', function(next){
-  var user = this;
+// //Save guest hash password
+GuestSchema.pre('save', function(next){
+  var guest = this;
   if(this.isModified('password') || this.isNew){
     bcrypt.genSalt(10, function(err, salt){
       if(err){
         return next(err);
       }
-      bcrypt.hash(user.password, salt, function(err, hash){
+      bcrypt.hash(guest.password, salt, function(err, hash){
           if(err){
             return next(err);
           }
-          user.password = hash;
+          guest.password = hash;
           next();
       });
     });
@@ -48,7 +47,7 @@ UserSchema.pre('save', function(next){
 });
 
 //compare the password
-UserSchema.methods.comparePassword = function(pw, cb){
+GuestSchema.methods.comparePassword = function(pw, cb){
     bcrypt.compare(pw, this.password, function(err, isMatch){
       if(err){
         return cb(err);
@@ -58,4 +57,4 @@ UserSchema.methods.comparePassword = function(pw, cb){
     });
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Guest', GuestSchema);
