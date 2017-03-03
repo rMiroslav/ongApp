@@ -4,9 +4,11 @@ var Guest = require('../models/guest');
 var jwt = require("jsonwebtoken");
 var passport = require("passport");
 var config = require('../../config/main');
+
 require('../../config/passport')(passport);
 
-var findUser = function(req,res){
+var findOne = function(req,res){
+  if(req.body.role == 'volunteer'){
   User.findOne({
     email: req.body.email
   }, function(err, user){
@@ -26,7 +28,7 @@ var findUser = function(req,res){
           var token = jwt.sign(optsUser, config.secret);
           req.headers = {};
           req.headers.authorization = 'Bearer ' + token;
-          res.json({ success:true, token:'Bearer ' + token});
+          res.json({ success:true, token:'Bearer ' + token, user:optsUser});
         }else{
           res.send({success: false, message: 'Authentication faild. Password did not match!'});
         }
@@ -34,10 +36,8 @@ var findUser = function(req,res){
     }
 
   });
+  }
 }
 
-var fingOng = function(req, res){
 
-}
-exports.findUser = findUser;
-exports.fingOng = fingOng;
+exports.findOne = findOne;

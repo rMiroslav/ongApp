@@ -1,0 +1,7 @@
+<nav ng-if="vm.isNotLoggedin()">
+  <ul>
+    <li><a href="#" ui-sref="home">Home</a></li>
+    <li><a href="#" ui-sref="login">Login</a></li>
+  </ul>
+  {{vm.isLoggedin()}}
+</nav>

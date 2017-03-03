@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="volunteer">
+  <head>
+    <meta charset="utf-8">
+    <title>Volunteer</title>
+  </head>
+  <body>
+    <!-- include navbar for web -->
+    <web-navbar></web-navbar>
+
+    <!-- index view -->
+    <ui-view></ui-view>
+
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/services/authService.js"></script>
+    <script type="text/javascript" src="app/services/authInterceptor.js"></script>
+    <script type="text/javascript" src="app/web/web.module.js"></script>
+    <script type="text/javascript" src="app/directives/web.navbar.js"></script>
+    <script type="text/javascript" src="app/register/register.module.js"></script>
+    <script type="text/javascript" src="app/auth/login.module.js"></script>
+    <script type="text/javascript" src="app/directives/navbar.js"></script>
+    <script type="text/javascript" src="app/dash/dash.module.js"></script>
+  </body>
+</html>
