@@ -1,13 +1,7 @@
-<div class="" style="margin-left:100px;margin-top:50px;">
-    <form class="" action="/" method="post">
-  <div class="">
-    <input type="email" name="email" ng-model="vm.volunteer.email"><br>
-  </div>
-  <div class="">
-    <input type="password" name+"password" ng-model="vm.volunteer.password"><br>
-
-  </div>
-    <button ng-click="vm.login()" type="button">Login</button>
+<form ng-submit="vm.login()">
+  <input type="email" auto-fillable-field name="email" required ng-model="vm.volunteer.email"><br>
+  <input type="password" auto-fillable-field name="password" required ng-model="vm.volunteer.password"><br>
+  <input type="submit" id="submit" value="Login" />
+  <!-- <pre>list={{list}}</pre> -->
 </form>
 <a href="#" ui-sref="register">Register</a>
-</div>

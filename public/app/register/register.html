@@ -1,12 +1,24 @@
+
 <div class="" style="margin-left:100px;margin-top:50px;">
-    <form class="" action="/" method="post">
+    <form class="" action="/" method="post" autocomplete="off">
+      <div class="">
+        <div class="">
+          <label for="volunteer"> volunteer</label>
+          <input type="radio" id="volunteer" name="volunteer" required value="volunteer" ng-model="vm.user.role">
+        </div>
+        <div class="">
+          <label for="ong">Ong</label>
+          <input type="radio" id="ong" name="ong" value="ong" required ng-model="vm.user.role">
+        </div>
+
+      </div>
   <div class="">
-    <input type="email" name="email" ng-model="vm.user.email"><br>
+    <input type="email" name="email" required ng-model="vm.user.email"><br>
   </div>
   <div class="">
-    <input type="password" name+"password" ng-model="vm.user.password"><br>
+    <input type="password" name+"password" required ng-model="vm.user.password"><br>
 
   </div>
-    <button ng-click="vm.register()" type="button">Register</button>
+    <button ng-click="vm.register()" name="register" type="button">Register</button>
 </form>
 </div>

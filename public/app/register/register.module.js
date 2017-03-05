@@ -3,7 +3,8 @@ angular.module('register',[])
   var vm = this;
   vm.user = {
     email:'',
-    password:''
+    password:'',
+    role:''
   }
 
 vm.register = function(){

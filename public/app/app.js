@@ -25,11 +25,11 @@
      }
 
    });
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false,
-      rewriteLinks: true
-});
+//     $locationProvider.html5Mode({
+//       enabled: true,
+//       requireBase: false,
+//       rewriteLinks: true
+// });
     $locationProvider.hashPrefix('!');
    $stateProvider
    .state('main', {
