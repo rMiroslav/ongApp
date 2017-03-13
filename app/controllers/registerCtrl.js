@@ -8,21 +8,32 @@ var config = require('../../config/main');
 require('../../config/passport')(passport);
 
 
+ function makeid(len){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for( var i=0; i < len; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
+
 //User
-var CreateUser = function(req, res){
+var CreateUser = function(req, res, next){
   if(!req.body.email || !req.body.password){
     res.json({success:false, message:'Please enter an email and password to register!'});
   }else{
     var newUser = new User({
       email: req.body.email,
-      password:req.body.password
+      password:req.body.password,
+      emailcode: makeid(32)
     });
 
     newUser.save(function(err){
       if(err){
         return res.json({success:false, message:'Email already exists!'});
       }else{
-        res.json({success:true, message:'User was created'});
+        req.body.emailcode = newUser.emailcode; 
+        next();
+        // res.json({success:true, message:'User was created'});
       }
 
     });
@@ -35,15 +46,9 @@ var CreateGuest= function(req, res, next){
   if(!req.body.email || !req.body.password){
     // res.json({success:false, message:'Please enter an email and password to register!'});
   }else{
-    function makeid(){
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
-  }
+   
     var newGuest = new Guest({
-      email: makeid() +'@guest.com',
+      email: makeid(5) +'@guest.com',
       password: "NewGuest2017"
     });
 

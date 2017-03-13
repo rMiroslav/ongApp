@@ -11,7 +11,7 @@ angular.module('volunteer.interceptor',[])
     },
     responseError: function(response){
       console.log(response);
-        $location.path('/login');
+        // $location.path('/login');
       return $q.reject(response);
     }
   }

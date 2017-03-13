@@ -1,9 +1,13 @@
 angular.module('dash',['auth', 'nav'])
-.controller('DashController', ['authService', function(authService){
+.controller('DashController', ['authService', '$http', 'BASE_URL', function(authService, $http, BASE_URL){
   var vm = this;
 
-  vm.logout = function(){
+  vm.events = function(){
+    $http.get(BASE_URL + '/events').then(function success(response){
+      console.log("events", response)
 
-    authService.logout();
+    },function error(error){
+      console.log("events", error) 
+    })
   }
 }]);

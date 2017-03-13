@@ -5,6 +5,8 @@ var jwt = require("jsonwebtoken");
 var passport = require("passport");
 var config = require('../../config/main');
 
+
+
 require('../../config/passport')(passport);
 
 var findOne = function(req,res){
@@ -18,12 +20,15 @@ var findOne = function(req,res){
       res.send({success:false, message:'Authentication faild. User not found!'});
     }else{
       user.comparePassword(req.body.password, function(err, isMatch){
+
         if(isMatch && !err){
           //create the token
           // console.log(user);
           var optsUser ={
             id:user.id,
-            email:user.email
+            email:user.email,
+            active:user.activated,
+            role:user.role
           }
           var token = jwt.sign(optsUser, config.secret);
           req.headers = {};
@@ -39,5 +44,25 @@ var findOne = function(req,res){
   }
 }
 
+var activateAcount = function(req, res){
+  User.findOne({email: req.params.email}, function(err, user){
+      if(req.params.email == user.email && req.params.emailcode == user.emailcode && user.activated != 1){
+        User.update({email: req.params.email}, {activated:1}, function(err, result){
+          if(err){
+            console.log(err)
+          }else{
+            res.redirect('http://localhost:8080/#!/dashboard');
+          }
+        })
+    }else if(user.activated == 1){
+      res.send('User already active')
+    }else{
+      res.send('Activation error! Please contact Volunteer Support!')
+    }
+  })
 
+   
+}
+
+exports.activateAcount = activateAcount;
 exports.findOne = findOne;

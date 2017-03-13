@@ -19,6 +19,14 @@ var UserSchema = new mongoose.Schema({
     enum:['Volunteer'],
     default:'Volunteer'
   },
+  activated:{
+    type:Number,
+    default: 0
+  },
+  emailcode:{
+    type:String,
+    required:true
+  },
   createdAt: {
     type: Date,
      default: Date.now

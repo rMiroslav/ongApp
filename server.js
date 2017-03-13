@@ -11,12 +11,13 @@ var engine = require('ejs-locals');
 var app = express();
 
 //set view engine
-// app.engine('ejs', engine);
-// app.set('view engine', 'ejs');
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
 //
 //
 // app.set('views', path.join(__dirname, '/public'));
 //serve static
+
 app.use(express.static(path.join(__dirname+'/public')));
 
 //Use bodyParser to make POST requests
@@ -41,7 +42,14 @@ mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 
 // unprotected routes
-app.use(expressJwt({ secret: config.secret}).unless({path: ['/api/login', '/api/register', '/api/guest', '/home', '/about']}));
+app.use(expressJwt({ secret: config.secret}).unless({path: [
+  '/api/login', 
+  '/api/register', 
+  '/api/guest',
+   /^\/api\/activate\/.*/, 
+    '/home',
+     '/about'
+     ]}));
 
 //handle error if not token
 app.use(function (err, req, res, next) {
@@ -51,14 +59,14 @@ app.use(function (err, req, res, next) {
      var resolvedPath = path.resolve(filePath);
     //  console.log(resolvedPath);
     //  res.sendFile(resolvedPath);
-    res.status(401).send('invalid token...');
-    // res.redirect('/login');
+    // res.status(401).send('invalid token...');
+    res.redirect('http://localhost:8080/#!/login');
   }
   // next();
 });
 
-app.use('/api', require('./app/routes/routes'));
-
+app.use('/api', require('./app/routes/auth'));
+app.use('/', require('./app/routes/events'));
 
 //listen
 app.listen(config.port, function(){

@@ -1,5 +1,5 @@
 angular.module('login',['auth'])
-.controller('LoginController', ['authService',function(authService){
+.controller('LoginController', ['authService', '$http', 'BASE_URL', function(authService, $http, BASE_URL){
   var vm = this;
 
   // vm.volunteer = {
@@ -18,4 +18,6 @@ angular.module('login',['auth'])
    authService.getUser(vm.volunteer);
 
   }
+
+
 }]);

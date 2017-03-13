@@ -17,6 +17,14 @@ var OngSchema = new mongoose.Schema({
     type:String,
     required:true
   },
+    activated:{
+    type:Number,
+    default: 0
+  },
+    emailcode:{
+    type:String,
+    required:true
+  },
   aproved:false,
   role:{
     type:String,

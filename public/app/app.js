@@ -9,6 +9,7 @@
     'register',
     'web.nav'
   ])
+  .constant('BASE_URL', 'http://localhost:8080')
 
  .run(['$rootScope', '$state', 'authService','$http','$location', function ($rootScope, $state, authService, $http, $location) {
    $rootScope.$state = $state;
@@ -35,6 +36,8 @@
    .state('main', {
      url: '/',
      templateUrl: 'app/main.html',
+     controllerAs: 'vm',
+     controller:'MainController',
      abstract: true,
       resolve:{
          redirectIfNotAuthenticated :function(authService){
@@ -87,5 +90,9 @@
  }])
  .controller("MainController",['$http', '$location', '$window', 'authService', function($http, $location, $window, authService){
    var vm = this;
+   console.log(1)
+     vm.logout = function(){
 
+        authService.logout();
+    }
  }]);
