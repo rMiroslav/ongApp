@@ -1,13 +1,17 @@
 angular.module('dash',['auth', 'nav'])
-.controller('DashController', ['authService', '$http', 'BASE_URL', function(authService, $http, BASE_URL){
+.controller('DashController', ['authService', '$http', 'BASE_URL', 'utilService', 'moment', function(authService, $http, BASE_URL, utilService, moment){
   var vm = this;
 
-  vm.events = function(){
-    $http.get(BASE_URL + '/events').then(function success(response){
-      console.log("events", response)
+  function init(){
+    utilService.getData().then(function(response){
+      vm.events = response;
+      vm.events.forEach(function(event){
+        event.start = moment(event.start).utcOffset('+0200').format('l LT');
+      });
 
-    },function error(error){
-      console.log("events", error) 
+      console.log(response)
     })
   }
+  
+  init();
 }]);

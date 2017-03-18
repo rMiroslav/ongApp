@@ -1,3 +1,5 @@
+'use strict';
+
 var api_key = 'key-be56bf25e2492de8506e04b3ed4d5eff';
 var domain = 'sandbox9e68c501fa864b8b826987e502fe4f0e.mailgun.org';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
@@ -19,7 +21,7 @@ var activateAcount = function(req, res, next){
 
   nodemailerMailgun.sendMail({
   from: 'Volunteer App <postmaster@sandbox9e68c501fa864b8b826987e502fe4f0e.mailgun.org>',
-  to: req.body.email, // An array if you have multiple recipients. 
+  to: 'rancovmiroslav@gmail.com', // An array if you have multiple recipients. 
   // cc:'second@domain.com',
   // bcc:'secretagent@company.gov',
   subject: 'Welcome to Volunteer App!',

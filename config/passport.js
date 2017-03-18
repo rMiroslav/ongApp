@@ -1,3 +1,5 @@
+'use strict';
+
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var User  = require('../app/models/user');

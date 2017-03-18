@@ -1,5 +1,13 @@
 <div class="" >
   <h1>Dashboard</h1>
 
-  <button type="button" ng-click="vm.events()">Events</button>
+  <div ng-repeat="event in vm.events | orderBy : 'createdAt' : true">
+    <div>{{event.title}}</div>
+    <div>{{event.createdBy}}</div>
+    <div>{{event.location}}</div>
+    <div>{{event.ongoing}}</div>
+    <div>{{event.id}}</div>
+    <div>time: {{event.start}}</div>
+<hr>
+  </div>
 </div>

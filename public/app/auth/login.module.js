@@ -15,7 +15,9 @@ angular.module('login',['auth'])
 
   vm.login = function(){
     // console.log(authService);
-   authService.getUser(vm.volunteer);
+   authService.getUser(vm.volunteer).then(function(response){
+    console.log(response)
+   });
 
   }
 

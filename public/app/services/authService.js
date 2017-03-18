@@ -1,37 +1,38 @@
+'use strict';
 angular.module('auth', [])
 
-.factory('authService', function($http, $location, $window, $q, $state, $timeout){
+.factory('authService', function($http, $location, $window, $q, $state, $timeout, BASE_URL){
   var factory = {};
   var defer = $q.defer();
 
   factory.register = function(data){
-     var url = 'http://localhost:8080/api/register';
+     var url = BASE_URL + '/api/register';
 
       $http.post(url, data).then(function success(response){
           console.log("response", response);
-          $location.path('/login');
+          // $state.go('login');
       }, function error(err){
         console.log("error", err);
       });
   }
 
   factory.getUser = function(data){
-    var url = 'http://localhost:8080/api/login';
-     $http.post(url, data).then(function success(response){
+    var url = BASE_URL + '/api/login';
+    return $http.post(url, data).then(function success(response){
        var response = response.data;
-      //  return response.user;
-        //  console.log("response", response);
-         storeUser(response);
+       storeUser(response);
+       console.log(response)
+       return response.user;
+         
      }, function error(err){
        console.log("error", err);
      });
   }
 
   function storeUser(response){
-    token = response.token;
-    user = response.user;
+   var token = response.token;
+   var user = response.user;
     if(!token && !user){
-      // $location.path('/login');
       $state.go('login');
     }else{
      localStorage.setItem("Token", JSON.stringify(token));
@@ -42,8 +43,11 @@ angular.module('auth', [])
   }
 
   factory.isLoggedin = function(user){
-    if(localStorage.getItem("Token")){
-      defer.resolve();
+    if(localStorage.getItem("Token")){    
+      //  $timeout(function(){
+        // $state.go('main.dashboard');
+    //  })   
+      defer.resolve();     
     }else{
       $timeout(function(){
         $state.go('login');

@@ -1,3 +1,4 @@
+'use strict';
 var dev = require('./dev');
 module.exports={
   'port': process.env.PORT || dev.serverPort,

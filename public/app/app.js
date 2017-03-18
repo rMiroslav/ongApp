@@ -1,5 +1,6 @@
  angular.module('volunteer',[
    'ui.router',
+   'angularMoment',
     'auth',
     'volunteer.interceptor',
     'dash',
@@ -7,7 +8,9 @@
     'web',
     'nav',
     'register',
-    'web.nav'
+    'web.nav',
+    'events',
+    'utils'
   ])
   .constant('BASE_URL', 'http://localhost:8080')
 
@@ -31,7 +34,7 @@
 //       requireBase: false,
 //       rewriteLinks: true
 // });
-    $locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('');
    $stateProvider
    .state('main', {
      url: '/',
@@ -69,28 +72,21 @@
        templateUrl: 'app/dash/dashboard.html',
        controllerAs:'vm',
        controller:'DashController',
-      //  resolve:{
-      //     redirectIfNotAuthenticated :function(authService){
-      //       return authService.isLoggedin()
-      //     }
-      //  }
      })
      .state('main.email', {
        url: '^/email',
        template:"Email Page"
-      //  templateUrl: 'app/dash/dashboard.html',
-      //  controllerAs:'vm',
-      //  controller:'DashController',
-      //  resolve:{
-      //     redirectIfNotAuthenticated :function(authService){
-      //       return authService.isLoggedin()
-      //     }
-      //  }
+     })
+     .state('main.create', {
+       url: '^/create',
+       templateUrl:"app/events/create.html",
+       controllerAs:'vm',
+       controller:'CreateController'
      })
  }])
- .controller("MainController",['$http', '$location', '$window', 'authService', function($http, $location, $window, authService){
+ .controller("MainController",['$http', '$location', '$window', 'authService','moment', function($http, $location, $window, authService, moment){
    var vm = this;
-   console.log(1)
+   console.log(moment(new Date(), 'MM-DD-YYYY HH-mm').format())
      vm.logout = function(){
 
         authService.logout();

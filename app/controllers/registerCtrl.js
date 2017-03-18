@@ -1,3 +1,4 @@
+'use strict';
 
 var User = require('../models/user');
 var Guest = require('../models/guest');
@@ -38,7 +39,6 @@ var CreateUser = function(req, res, next){
 
     });
   }
-
 };
 
 //Guest
