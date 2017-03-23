@@ -1,6 +1,32 @@
-<a style="cursor:pointer;float:right;" ng-click="vm.logout()">Logout</a>
+<div id="page-container" class="page-container page-sidebar-fixed page-header-fixed fade"
+	    ng-class="{
+	        'page-sidebar-minified': setting.layout.pageSidebarMinified,
+	        'page-content-full-height': setting.layout.pageContentFullHeight,
+	        'page-footer-fixed': setting.layout.pageFixedFooter,
+	        'page-with-right-sidebar': setting.layout.pageRightSidebar,
+	        'page-sidebar-minified': setting.layout.pageSidebarMinified,
+	        'page-with-two-sidebar': setting.layout.pageTwoSidebar,
+	        'page-right-sidebar-toggled': setting.layout.pageTwoSidebar,
+	        'page-with-top-menu': setting.layout.pageTopMenu,
+	        'page-without-sidebar': setting.layout.pageWithoutSidebar,
+	        'page-with-wide-sidebar': setting.layout.pageWideSidebar,
+	        'page-with-light-sidebar': setting.layout.pageLightSidebar,
+	        'p-t-0': setting.layout.pageWithoutHeader
+	    }">
+</div>
+<topbar></topbar>
 <!-- include view for main app -->
 <navbar></navbar>
 
 <!-- main app view -->
-<ui-view></ui-view>
+<div id="content" class="content">
+    <ol class="breadcrumb pull-right">
+				<li><a href="javascript:;">Home</a></li>
+				<li><a href="javascript:;">Extra</a></li>
+				<li class="active">Timeline</li>
+			</ol>
+
+            <h1 class="page-header">Timeline <small>header small text goes here...</small></h1>
+    <ui-view></ui-view>
+</div>
+

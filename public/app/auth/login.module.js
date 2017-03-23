@@ -15,9 +15,12 @@ angular.module('login',['auth'])
 
   vm.login = function(){
     // console.log(authService);
-   authService.getUser(vm.volunteer).then(function(response){
-    console.log(response)
-   });
+    if(vm.volunteer.email != '' && vm.volunteer.password != ''){
+        authService.getUser(vm.volunteer).then(function(response){
+            console.log(response)
+          });
+    }
+   
 
   }
 

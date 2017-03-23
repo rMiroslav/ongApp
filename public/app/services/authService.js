@@ -21,7 +21,6 @@ angular.module('auth', [])
     return $http.post(url, data).then(function success(response){
        var response = response.data;
        storeUser(response);
-       console.log(response)
        return response.user;
          
      }, function error(err){

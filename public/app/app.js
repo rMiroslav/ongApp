@@ -1,12 +1,15 @@
  angular.module('volunteer',[
    'ui.router',
    'angularMoment',
+   'ui.bootstrap',
+   'oc.lazyLoad',
     'auth',
     'volunteer.interceptor',
     'dash',
     'login',
     'web',
     'nav',
+    'top',
     'register',
     'web.nav',
     'events',
@@ -82,6 +85,12 @@
        templateUrl:"app/events/create.html",
        controllerAs:'vm',
        controller:'CreateController'
+     })
+     .state('main.events', {
+       url: '^/events',
+       templateUrl:"app/events/events.list.html",
+       controllerAs:'vm'
+      //  controller:'CreateController'
      })
  }])
  .controller("MainController",['$http', '$location', '$window', 'authService','moment', function($http, $location, $window, authService, moment){
