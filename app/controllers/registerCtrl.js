@@ -19,7 +19,7 @@ require('../../config/passport')(passport);
 
 //User
 var CreateUser = function(req, res, next){
-  if(!req.body.email || !req.body.password){
+  if(!req.body.email && !req.body.password){
     res.json({success:false, message:'Please enter an email and password to register!'});
   }else{
     var newUser = new User({

@@ -8,9 +8,12 @@ angular.module('auth', [])
   factory.register = function(data){
      var url = BASE_URL + '/api/register';
 
-      $http.post(url, data).then(function success(response){
-          console.log("response", response);
+     return $http.post(url, data).then(function success(response){
+       var response = response.data
+      console.log("response", response);
           // $state.go('login');
+       return response
+          
       }, function error(err){
         console.log("error", err);
       });

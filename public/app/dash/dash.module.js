@@ -1,17 +1,18 @@
+'use strict';
 angular.module('dash',['auth', 'nav'])
-.controller('DashController', ['authService', '$http', 'BASE_URL', 'utilService', 'moment', function(authService, $http, BASE_URL, utilService, moment){
-  var vm = this;
 
-  function init(){
-    utilService.getData().then(function(response){
-      vm.events = response;
-      vm.events.forEach(function(event){
-        event.start = moment(event.start).utcOffset('+0200').format('l LT');
-      });
+.config(config);
+config.$inject = ['$stateProvider','$urlRouterProvider','$httpProvider', '$locationProvider'];
 
-      console.log(response)
-    })
-  }
-  
-  init();
-}]);
+function config($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
+  $stateProvider 
+     .state('main.dashboard', {
+       url: '/dashboard',
+       templateUrl: 'app/dash/dashboard.html',
+       controllerAs:'vm',
+       controller:'DashController',
+     })
+
+}
+
+

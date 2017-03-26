@@ -1,13 +1,15 @@
+'use strict';
 angular.module('register',[])
-.controller('RegisterController', ['authService', function(authService){
-  var vm = this;
-  vm.user = {
-    email:'',
-    password:'',
-    role:''
-  }
 
-vm.register = function(){
-  authService.register(vm.user)
+.config(config);
+config.$inject = ['$stateProvider','$urlRouterProvider','$httpProvider', '$locationProvider'];
+function config($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
+  $stateProvider
+   .state('register', {
+       url: '/register',
+       templateUrl: 'app/register/register.html',
+       controllerAs:'vm',
+       controller:'RegisterController'
+     })
 }
-}]);
+

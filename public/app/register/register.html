@@ -1,24 +1,92 @@
-
-<div class="" style="margin-left:100px;margin-top:50px;">
-    <form class="" action="/" method="post" autocomplete="off">
-      <div class="">
-        <div class="">
-          <label for="volunteer"> volunteer</label>
-          <input type="radio" id="volunteer" name="volunteer" required value="volunteer" ng-model="vm.user.role">
+<!-- begin register -->
+<div class="register register-with-news-feed">
+    <!-- begin news-feed -->
+    <div class="news-feed">
+        <div class="news-image">
+            <img src="assets/img/login-bg/bg-8.jpg" alt="" />
         </div>
-        <div class="">
-          <label for="ong">Ong</label>
-          <input type="radio" id="ong" name="ong" value="ong" required ng-model="vm.user.role">
+        <div class="news-caption">
+            <h4 class="caption-title"><i class="fa fa-edit text-success"></i> Announcing the Color Admin app</h4>
+            <p>
+                As a Color Admin Apps administrator, you use the Color Admin console to manage your organization’s account, such as add new users, manage security settings, and turn on the services you want your team to access.
+            </p>
         </div>
-
-      </div>
-  <div class="">
-    <input type="email" name="email" required ng-model="vm.user.email"><br>
-  </div>
-  <div class="">
-    <input type="password" name+"password" required ng-model="vm.user.password"><br>
-
-  </div>
-    <button ng-click="vm.register()" name="register" type="button">Register</button>
-</form>
+    </div>
+    <!-- end news-feed -->
+    <!-- begin right-content -->
+    <div class="right-content">
+        <br><br>  <div class="col-md-1"></div>
+        <div class="col-md-10" >
+            <div class="alert alert-success fade in m-b-15" ng-if="vm.success">
+                        <strong>Success!</strong>
+                        {{vm.alertSuccess}}
+                        <span class="close" data-dismiss="alert">&times;</span>
+                    </div>
+            <div class="alert alert-danger fade in m-b-15" ng-if="vm.error">
+                        <strong>Error!</strong>
+                        {{vm.alertError}}
+                        <span class="close" data-dismiss="alert">&times;</span>
+                    </div>
+        </div>
+          
+        <!-- begin register-header -->
+        <h1 class="register-header">
+            Sign Up
+            <small>Create your Color Admin Account. It’s free and always will be.</small>
+        </h1>
+        <!-- end register-header -->
+        <!-- begin register-content -->
+        <div class="register-content">
+            <form  class="margin-bottom-0" ng-submit="vm.register()" novalidate>
+                <!--<label class="control-label">Name <span class="text-danger">*</span></label>
+                <div class="row row-space-10">
+                    <div class="col-md-6 m-b-15">
+                        <input type="text" class="form-control" placeholder="First name" required />
+                    </div>
+                    <div class="col-md-6 m-b-15">
+                        <input type="text" class="form-control" placeholder="Last name" required />
+                    </div>
+                </div>-->
+                <label class="control-label">Email <span class="text-danger">*</span></label>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        <input type="email" class="form-control" placeholder="Email address" name="email" required ng-model="vm.user.email"/>
+                    </div>
+                </div>
+                <!--<label class="control-label">Re-enter Email <span class="text-danger">*</span></label>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" placeholder="Re-enter email address" required />
+                    </div>
+                </div>-->
+                <label class="control-label">Password <span class="text-danger">*</span></label>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required ng-model="vm.user.password"/>
+                    </div>
+                </div>
+                <div class="checkbox m-b-30">
+                    <label>
+                        <input type="checkbox" required /> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Data Policy</a>, including our <a href="#">Cookie Use</a>.
+                    </label>
+                </div>
+                <div class="register-buttons">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" name="submit">Sign Up</button>
+                </div>
+                <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+                    Already a member? Click <a ui-sref="login">here</a> to login.
+                </div>
+                <hr />
+                <p class="text-center">
+                    &copy; Color Admin All Right Reserved 2015
+                </p>
+            </form>
+        </div>
+        <!-- end register-content -->
+    </div>
+    <!-- end right-content -->
 </div>
+<!-- end register -->
+
+
+

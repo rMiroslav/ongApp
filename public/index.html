@@ -17,6 +17,7 @@
 	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="assets/css/animate.min.css" rel="stylesheet" />
 	<link href="assets/css/style.min.css" rel="stylesheet" />
+	<!--<link href="assets/css/styleFront.css" rel="stylesheet" />-->
 	<link href="assets/css/style-responsive.min.css" rel="stylesheet" />
 	<link href="assets/css/theme/default.css" rel="stylesheet" id="theme" />
 	<!-- ================== END BASE CSS STYLE ================== -->
@@ -25,7 +26,7 @@
   </head>
   <body>
     <!-- include navbar for web -->
-    <web-navbar></web-navbar>
+    <!--<web-navbar></web-navbar>-->
 
     <!-- index view -->
     <ui-view></ui-view>
@@ -40,12 +41,12 @@
 	<![endif]-->
 
     <!-- ================== BEGIN BASE ANGULAR JS ================== -->
-    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/angularjs/angular-ui-route.min.js"></script>
     <script src="assets/plugins/bootstrap-angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="assets/plugins/angularjs/ocLazyLoad.min.js"></script>
-    <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-moment/angular-moment.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/moment/moment.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/moment/angular-moment.min.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="app/services/authService.js"></script>
     <script type="text/javascript" src="app/services/authInterceptor.js"></script>
@@ -53,11 +54,17 @@
     <script type="text/javascript" src="app/web/web.module.js"></script>
     <script type="text/javascript" src="app/directives/web.navbar.js"></script>
     <script type="text/javascript" src="app/register/register.module.js"></script>
-    <script type="text/javascript" src="app/auth/login.module.js"></script>
+	<script type="text/javascript" src="app/register/controllers/registerController.js"></script>
+    <script type="text/javascript" src="app/login/login.module.js"></script>
+	<script type="text/javascript" src="app/login/controllers/loginController.js"></script>
     <script type="text/javascript" src="app/directives/top_menu.js"></script>
     <script type="text/javascript" src="app/directives/navbar.js"></script>
     <script type="text/javascript" src="app/dash/dash.module.js"></script>
+	<script type="text/javascript" src="app/dash/controllers/dashController.js"></script>
+	<script type="text/javascript" src="app/email/email.module.js"></script>
     <script type="text/javascript" src="app/events/Event.module.js"></script>
+	<script type="text/javascript" src="app/events/controllers/createController.js"></script>
+	<script type="text/javascript" src="app/events/controllers/listController.js"></script>
     <!-- ================== END BASE ANGULAR JS ================== -->
 
 
@@ -73,6 +80,7 @@
 	<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
 	<!-- ================== END BASE JS ================== -->
+
 
   </body>
 </html>
