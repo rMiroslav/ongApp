@@ -1,28 +1,32 @@
 angular.module('events',['auth'])
-.controller('CreateController', ['authService', '$http', 'BASE_URL', 'utilService', function(authService, $http, BASE_URL, utilService){
-  var vm = this;
-  
-  var ong = JSON.parse(localStorage.getItem("User"))
 
+.config(config);
+config.$inject = ['$stateProvider','$urlRouterProvider','$httpProvider', '$locationProvider'];
 
-  vm.event = {
-    title:'',
-    createdBy: ong.email,
-    location: '',
-    volunteers: '',
-    content: '',
-    start: new Date(),
-    ongoing:'In process',
-    ong_id: ong.id,
-    tags: '',
-    phone: '',
-    address: ''
-  }
+function config($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
+  $stateProvider
+   .state('main.events', {
+       url: '/events',
+       abstract: true,
+       template:"<ui-view></ui-view>"
+     })
+     .state('main.events.create', {
+       url: '/create',
+       templateUrl:"app/events/create.html",
+       controllerAs:'vm',
+       controller:'CreateController'
+     })
+     .state('main.events.list', {
+       url: '/list',
+       templateUrl:"app/events/events.list.html",
+       controllerAs:'vm',
+       controller:'ListController'
+     })
+     .state('main.events.detail', {
+       url: '/list',
+       templateUrl:"app/events/events.detail.html",
+       controllerAs:'vm',
+       controller:'DetailController'
+     })
+}
 
-  vm.create = function(){
-    utilService.sendData(vm.event);
-     vm.event = null;
-  }
-
-
-}]);

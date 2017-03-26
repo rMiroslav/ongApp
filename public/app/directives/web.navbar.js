@@ -1,3 +1,4 @@
+'use strict';
 angular.module('web.nav',[])
 
 .directive('webNavbar', function(){
@@ -10,7 +11,7 @@ angular.module('web.nav',[])
       var vm = this;
       vm.isNotLoggedin = function(){
         return (localStorage.getItem("User")) ? false : true;
-        App.initSidebar();
+       
       }
     }
   }

@@ -1,3 +1,4 @@
+'use strict';
 angular.module('nav',[])
 
 .directive('navbar', function(){
@@ -7,6 +8,6 @@ angular.module('nav',[])
     // controllerAs: 'vm',
     // controller:function(){
     //   var vm = this;
-    // }
+    // } App.initSidebar();
   }
 });

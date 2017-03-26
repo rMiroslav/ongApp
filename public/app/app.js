@@ -1,3 +1,4 @@
+'use strict';
  angular.module('volunteer',[
    'ui.router',
    'angularMoment',
@@ -13,7 +14,8 @@
     'register',
     'web.nav',
     'events',
-    'utils'
+    'utils',
+    'email'
   ])
   .constant('BASE_URL', 'http://localhost:8080')
 
@@ -21,8 +23,16 @@
    $rootScope.$state = $state;
 
  }])
- .config(['$stateProvider','$urlRouterProvider','$httpProvider', '$locationProvider',  function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
-  $httpProvider.interceptors.push('authInterceptor');
+
+ .config(config)
+ .controller("MainController", MainController);
+ config.$inject = ['$stateProvider','$urlRouterProvider','$httpProvider', '$locationProvider'];
+ MainController.$inject = ['$http', '$location', '$window', 'authService','moment'];
+
+
+
+ function config($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider){
+ $httpProvider.interceptors.push('authInterceptor');
    $urlRouterProvider.otherwise(function($injector, $location, $window){
      var $state = $injector.get("$state");
      if(localStorage.getItem("Token") && localStorage.getItem("User")){
@@ -39,8 +49,16 @@
 // });
     $locationProvider.hashPrefix('');
    $stateProvider
-   .state('main', {
+
+    .state('home', {
      url: '/',
+     templateUrl: 'app/web/home.html',
+     controllerAs:'vm',
+     controller:'WebController'
+   })
+   
+   .state('main', {
+     url: '',
      templateUrl: 'app/main.html',
      controllerAs: 'vm',
      controller:'MainController',
@@ -50,54 +68,15 @@
            return authService.isLoggedin()
          }
       }
-   })
+   }) 
+  
+ }
 
-   .state('home', {
-     url: '/home',
-     templateUrl: 'app/web/home.html',
-     controllerAs:'vm',
-     controller:'WebController'
-   })
-     .state('login', {
-       url: '/login',
-       templateUrl: 'app/auth/login.html',
-       controllerAs:'vm',
-       controller:'LoginController'
-     })
-     .state('register', {
-       url: '/register',
-       templateUrl: 'app/register/register.html',
-       controllerAs:'vm',
-       controller:'RegisterController'
-     })
-     .state('main.dashboard', {
-       url: '^/dashboard',
-       templateUrl: 'app/dash/dashboard.html',
-       controllerAs:'vm',
-       controller:'DashController',
-     })
-     .state('main.email', {
-       url: '^/email',
-       template:"Email Page"
-     })
-     .state('main.create', {
-       url: '^/create',
-       templateUrl:"app/events/create.html",
-       controllerAs:'vm',
-       controller:'CreateController'
-     })
-     .state('main.events', {
-       url: '^/events',
-       templateUrl:"app/events/events.list.html",
-       controllerAs:'vm'
-      //  controller:'CreateController'
-     })
- }])
- .controller("MainController",['$http', '$location', '$window', 'authService','moment', function($http, $location, $window, authService, moment){
-   var vm = this;
-   console.log(moment(new Date(), 'MM-DD-YYYY HH-mm').format())
+ function MainController($http, $location, $window, authService, moment){
+  var vm = this;
+  //  console.log(moment(new Date(), 'MM-DD-YYYY HH-mm').format())
      vm.logout = function(){
-
         authService.logout();
-    }
- }]);
+     }
+
+ }
