@@ -12,6 +12,8 @@ function RegisterController(authService, $state){
   vm.alertSuccess = '';
   vm.alertError = '';
   vm.user = {
+    first_name: '',
+    last_name: '',
     email:'',
     password:'',
     role:'volunteer'

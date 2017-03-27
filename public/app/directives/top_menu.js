@@ -4,9 +4,12 @@ angular.module('top',[])
   return {
     restrict:'EA',
     templateUrl:'app/directives/top_menu.html',
-    // controllerAs: 'vm',
-    // controller:function(){
-    //   var vm = this;
-    // }
+    controllerAs: 'vm',
+    bindToController: true,
+    controller:function($scope){
+      var vm = this;
+      vm.user  =  JSON.parse(localStorage.getItem("User"))
+      console.log(vm.user)
+    }
   }
 });

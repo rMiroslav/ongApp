@@ -23,6 +23,8 @@ var CreateUser = function(req, res, next){
     res.json({success:false, message:'Please enter an email and password to register!'});
   }else{
     var newUser = new User({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       email: req.body.email,
       password:req.body.password,
       emailcode: makeid(32)

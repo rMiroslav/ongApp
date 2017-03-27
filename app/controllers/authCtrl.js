@@ -26,8 +26,9 @@ var findOne = function(req,res){
           // console.log(user);
           var optsUser ={
             id:user.id,
+            name:user.first_name + ' ' + user.last_name,
             email:user.email,
-            active:user.activated,
+            active:user.active,
             role:user.role
           }
           var token = jwt.sign(optsUser, config.secret);
@@ -46,15 +47,15 @@ var findOne = function(req,res){
 
 var activateAcount = function(req, res){
   User.findOne({email: req.params.email}, function(err, user){
-      if(req.params.email == user.email && req.params.emailcode == user.emailcode && user.activated != 1){
-        User.update({email: req.params.email}, {activated:1}, function(err, result){
+      if(req.params.email == user.email && req.params.emailcode == user.emailcode && user.active != 1){
+        User.update({email: req.params.email}, {active:1}, function(err, result){
           if(err){
             console.log(err)
           }else{
             res.redirect('http://localhost:8080/#!/dashboard');
           }
         })
-    }else if(user.activated == 1){
+    }else if(user.active == 1){
       res.send('User already active')
     }else{
       res.send('Activation error! Please contact Volunteer Support!')

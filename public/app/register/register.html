@@ -38,15 +38,15 @@
         <!-- begin register-content -->
         <div class="register-content">
             <form  class="margin-bottom-0" ng-submit="vm.register()" novalidate>
-                <!--<label class="control-label">Name <span class="text-danger">*</span></label>
+                <label class="control-label">Name <span class="text-danger">*</span></label>
                 <div class="row row-space-10">
                     <div class="col-md-6 m-b-15">
-                        <input type="text" class="form-control" placeholder="First name" required />
+                        <input type="text" class="form-control" placeholder="First name" required ng-model="vm.user.first_name"/>
                     </div>
                     <div class="col-md-6 m-b-15">
-                        <input type="text" class="form-control" placeholder="Last name" required />
+                        <input type="text" class="form-control" placeholder="Last name" required ng-model="vm.user.last_name"/>
                     </div>
-                </div>-->
+                </div>
                 <label class="control-label">Email <span class="text-danger">*</span></label>
                 <div class="row m-b-15">
                     <div class="col-md-12">
