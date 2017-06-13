@@ -15,7 +15,7 @@
     utilService.getData().then(function(response){
       vm.events = response;
       vm.events.forEach(function(event){
-        event.start = moment(event.start).utcOffset('+0200').format('l LT');
+        // event.start = moment(event.start).utcOffset('+0200').format('l LT');
       });
 
       console.log(response)

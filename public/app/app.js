@@ -27,7 +27,7 @@
  .config(config)
  .controller("MainController", MainController);
  config.$inject = ['$stateProvider','$urlRouterProvider','$httpProvider', '$locationProvider'];
- MainController.$inject = ['$http', '$location', '$window', 'authService','moment'];
+ MainController.$inject = ['$http', '$location', '$window', 'authService','moment', 'utilService', 'BASE_URL'];
 
 
 
@@ -56,6 +56,23 @@
      controllerAs:'vm',
      controller:'WebController'
    })
+   .state('reset', {
+     url:'/resetPassword',
+     templateUrl:'app/login/reset.html',
+     controllerAs: 'vm',
+     controller:'MainController'
+   })
+    .state('unactive', {
+     url: '/unactive',
+     templateUrl: 'app/login/unactiveAccount.html',
+     controllerAs:'vm',
+     controller:'WebController',
+    //  resolve:{
+    //    redirectIfActive: function(authService){
+    //        return authService.isUnactive()
+    //    }
+    //  }
+   })
    
    .state('main', {
      url: '',
@@ -72,11 +89,32 @@
   
  }
 
- function MainController($http, $location, $window, authService, moment){
+ function MainController($http, $location, $window, authService, moment, utilService, BASE_URL){
   var vm = this;
+  // console.log(utilService.getData())
+  // var url = BASE_URL + '/api/findOne';
+  //   var params = JSON.parse(localStorage.getItem('User')).email;
+  //   utilService.getData(url, params).then(function(response){
+  //     console.log(response)
+  //       vm.currentUser = response;
+  //   })
+  vm.user = JSON.parse(localStorage.getItem('User'));
   //  console.log(moment(new Date(), 'MM-DD-YYYY HH-mm').format())
      vm.logout = function(){
         authService.logout();
+     }
+
+     vm.resetUser = {
+       email:'',
+       role:''
+     }
+     vm.reset = function(){
+       if(!vm.resetUser){
+         vm.resetError = true;
+       }
+        console.log(vm.resetUser)
+        vm.resetSuccess = true;
+        vm.resetUser = null;
      }
 
  }

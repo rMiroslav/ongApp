@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var registerCtrl = require('../controllers/registerCtrl');
 var authCtrl = require('../controllers/authCtrl');
+var usersCtrl = require('../controllers/usersCtrl');
 var mail = require('../../config/mail');
 var passport = require("passport");
 var jwt = require("jsonwebtoken");
@@ -14,6 +15,7 @@ router.post('/register', registerCtrl.CreateUser, mail.activateAcount, function(
 router.post('/guest', registerCtrl.CreateGuest);
 router.post('/login', authCtrl.findOne);
 router.get('/activate/:email/:emailcode', authCtrl.activateAcount);
+router.get('/findOne', usersCtrl.findOne);
 // router.get('/', function(req, res){
 //   console.log(req.body);
 //   // res.send("you are in!!!")

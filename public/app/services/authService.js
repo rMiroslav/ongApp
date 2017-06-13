@@ -34,14 +34,32 @@ angular.module('auth', [])
   function storeUser(response){
    var token = response.token;
    var user = response.user;
+   console.log(user)
     if(!token && !user){
       $state.go('login');
+    }else if(user.active == 0){
+      console.log(user)
+        $state.go('unactive');
     }else{
      localStorage.setItem("Token", JSON.stringify(token));
       localStorage.setItem("User", JSON.stringify(user));
       // $location.path('/');
       $state.go('main.dashboard');
     }
+  }
+
+  factory.isUnactive = function(){
+    var user = JSON.parse(localStorage.getItem('User'));
+    console.log(user)
+    if(user.active = 0){
+      defer.resolve();
+    }else{
+          $timeout(function(){
+            $state.go('login');
+        })
+            defer.reject();
+        }
+        return defer.promise;
   }
 
   factory.isLoggedin = function(user){

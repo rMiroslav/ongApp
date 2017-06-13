@@ -5,7 +5,7 @@ angular.module('utils', [])
   var factory = {};
   var defer = $q.defer();
 
-  factory.getData = function(){
+  factory.getData = function(url){
        var url = BASE_URL + '/events';
     return $http.get(url).then(function success(response){
         var data = response.data.data;
